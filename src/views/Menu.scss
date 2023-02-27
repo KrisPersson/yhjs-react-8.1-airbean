@@ -1,0 +1,44 @@
+@import '../scss/variables';
+
+.menu {
+    font-family: 'PT Serif', serif;
+    padding: 8rem 2rem 6rem;
+    color: $brown;
+    width:414px;
+    background: no-repeat top/100% url("leaves-bg-top.svg"),
+                no-repeat bottom/100% url("leaves-bg-bottom.svg"),
+                $pink;
+
+
+    &__h1 {
+        margin: 1rem;
+        font-size: 42px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    &__article {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+
+    &__add {
+        font-size: 25px;
+        background-color: $brown;
+        color: white;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        line-height: 1.2rem;
+    }
+
+    &__item {
+        margin-left: 1rem;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+}
