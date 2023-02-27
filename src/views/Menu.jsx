@@ -3,7 +3,10 @@ import "./Menu.scss"
 function Menu() {
 
     return (
-        <section></section>
+        <section className="menu">
+            <img src="leaves-bg-top.svg" />
+            <img src="leaves-bg-bottom.svg" />
+        </section>
     )
 }
 
