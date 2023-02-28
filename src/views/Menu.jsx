@@ -32,7 +32,12 @@ function Menu() {
                             +
                         </div>
                         <div className="menu__item">
-                            {menuItem.title}
+                            <div className="menu__row">
+                                <span className="menu__title">{menuItem.title}</span>
+                                <span className="menu__dots"></span>
+                                <span className="menu__price">{menuItem.price}&nbsp;kr</span>
+                            </div>
+                            <p className="menu__desc">{menuItem.desc}</p>
                         </div>
                     </article>
                 )

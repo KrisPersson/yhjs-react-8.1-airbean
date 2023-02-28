@@ -2,10 +2,10 @@
 
 .menu {
     font-family: 'PT Serif', serif;
-    padding: 8rem 2rem 6rem;
+    padding: 8rem 1rem 6rem;
     position: relative;
-    height: 100vh;
-    max-height: 800px;
+    // height: 100vh;
+    // max-height: 800px;
     color: $brown;
     background: no-repeat top/100% url("leaves-bg-top.svg"),
                 no-repeat bottom/100% url("leaves-bg-bottom.svg"),
@@ -21,7 +21,8 @@
 
     &__article {
         display: flex;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+        align-items: center;
     }
 
     &__add {
@@ -41,6 +42,28 @@
         margin-left: 1rem;
         font-size: 23px;
         font-weight: bold;
+        flex-grow: 1;
+    }
+
+    &__row {
+        display: flex;
+        width: 100%;
+    }
+
+        &__title {
+            width: max-content;
+        }
+
+        &__dots {
+            margin: 0 .2rem .4rem .1rem;
+            flex-grow: 1;
+            border-bottom: 2px dotted rgb(0 0 0 / .4);
+        }
+
+    &__desc {
+        font-size: 12px;
+        margin: 0;
+        font-weight: normal;
     }
 
 }
