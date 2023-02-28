@@ -14,6 +14,8 @@ export default function Cart() {
         }
     }
 
+    console.log(newCart);
+
     const [showCart, setShowCart] = useState(false);
 
     const menuItems = newCart.map((item, i) => {
@@ -29,7 +31,7 @@ export default function Cart() {
         )
     })
 
-    const sum = cart.reduce((acc, item) => acc + item.price,0)
+    const sum = cart.reduce((acc, item) => acc + item.price, 0)
 
     function handleToggleClick(e) {
         const parent = e.currentTarget.parentElement
@@ -42,7 +44,10 @@ export default function Cart() {
     }
 
     function handleBuyClick() {
-
+        // skicka ordern (newCart) till /api/beans/order
+        // men api:et tillåter bara en kaffe
+        // return: {eta:number, orderNr:string} 
+        // spara i sessionStorage eller store
     }
 
     return (
@@ -53,6 +58,7 @@ export default function Cart() {
             </section>
             {showCart &&
             <section className="order">
+                <div className="order__arrow"></div>
                 <h2 className="order__h2">Din beställning</h2>
                 {menuItems}
                 <section className="order__total">
