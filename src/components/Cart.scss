@@ -1,0 +1,51 @@
+@import '../scss/variables';
+
+.cart {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+}
+
+.cart .icon {
+    background-color: $brown;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+
+    &__number {
+        position: absolute;
+        top: -4px;
+        right: 0;
+        background-color: #e5674e;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+
+    }
+}
+
+.cart .order {
+    background-color: white;
+    color: $brown;
+    position: absolute;
+    top: 95px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 93%;
+    height: 84%;
+
+}

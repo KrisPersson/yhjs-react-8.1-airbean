@@ -3,8 +3,10 @@
 .menu {
     font-family: 'PT Serif', serif;
     padding: 8rem 2rem 6rem;
+    position: relative;
+    height: 100vh;
+    max-height: 800px;
     color: $brown;
-    width:414px;
     background: no-repeat top/100% url("leaves-bg-top.svg"),
                 no-repeat bottom/100% url("leaves-bg-bottom.svg"),
                 $pink;
@@ -24,6 +26,7 @@
 
     &__add {
         font-size: 25px;
+        line-height: 1.2rem;
         background-color: $brown;
         color: white;
         width: 2rem;
@@ -32,7 +35,6 @@
         display: grid;
         place-items: center;
         cursor: pointer;
-        line-height: 1.2rem;
     }
 
     &__item {

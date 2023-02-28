@@ -2,6 +2,7 @@ import "./Menu.scss"
 import { useState, useEffect} from "react"
 import { useDispatch } from "react-redux";
 import { addItem } from "../actions/cartActions";
+import Cart from "../components/Cart.jsx"
 
 function Menu() {
     const dispatch = useDispatch()
@@ -21,6 +22,7 @@ function Menu() {
 
     return (
         <section className="menu">
+            <Cart />
             <h1 className="menu__h1">Meny</h1>
             
             {menuItems.map((menuItem, index) => {
