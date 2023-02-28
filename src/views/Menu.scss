@@ -4,13 +4,10 @@
     font-family: 'PT Serif', serif;
     padding: 8rem 1rem 6rem;
     position: relative;
-    // height: 100vh;
-    // max-height: 800px;
     color: $brown;
     background: no-repeat top/100% url("leaves-bg-top.svg"),
                 no-repeat bottom/100% url("leaves-bg-bottom.svg"),
                 $pink;
-
 
     &__h1 {
         margin: 1rem;
@@ -38,32 +35,19 @@
         cursor: pointer;
     }
 
+    &__add:hover {
+        opacity: .85;
+        transform: scale(1.1)
+    }
+    &__add:active {
+        opacity: 1;
+        transform: scale(1)
+    }
+
     &__item {
         margin-left: 1rem;
         font-size: 23px;
         font-weight: bold;
         flex-grow: 1;
     }
-
-    &__row {
-        display: flex;
-        width: 100%;
-    }
-
-        &__title {
-            width: max-content;
-        }
-
-        &__dots {
-            margin: 0 .2rem .4rem .1rem;
-            flex-grow: 1;
-            border-bottom: 2px dotted rgb(0 0 0 / .4);
-        }
-
-    &__desc {
-        font-size: 12px;
-        margin: 0;
-        font-weight: normal;
-    }
-
 }

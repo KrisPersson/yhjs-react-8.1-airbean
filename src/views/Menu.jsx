@@ -3,6 +3,7 @@ import { useState, useEffect} from "react"
 import { useDispatch } from "react-redux";
 import { addItem } from "../actions/cartActions";
 import Cart from "../components/Cart.jsx"
+import MenuItem from "../components/MenuItem.jsx"
 
 function Menu() {
     const dispatch = useDispatch()
@@ -32,12 +33,12 @@ function Menu() {
                             +
                         </div>
                         <div className="menu__item">
-                            <div className="menu__row">
-                                <span className="menu__title">{menuItem.title}</span>
-                                <span className="menu__dots"></span>
-                                <span className="menu__price">{menuItem.price}&nbsp;kr</span>
-                            </div>
-                            <p className="menu__desc">{menuItem.desc}</p>
+                            <MenuItem props={{
+                                title: menuItem.title,
+                                end: menuItem.price,
+                                desc: menuItem.desc,
+                                small: false
+                            }} />
                         </div>
                     </article>
                 )
