@@ -2,13 +2,12 @@
 
 .menu {
     font-family: 'PT Serif', serif;
-    padding: 8rem 2rem 6rem;
+    padding: 8rem 1rem 6rem;
+    position: relative;
     color: $brown;
-    width:414px;
     background: no-repeat top/100% url("leaves-bg-top.svg"),
                 no-repeat bottom/100% url("leaves-bg-bottom.svg"),
                 $pink;
-
 
     &__h1 {
         margin: 1rem;
@@ -19,11 +18,13 @@
 
     &__article {
         display: flex;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+        align-items: center;
     }
 
     &__add {
         font-size: 25px;
+        line-height: 1.2rem;
         background-color: $brown;
         color: white;
         width: 2rem;
@@ -32,13 +33,22 @@
         display: grid;
         place-items: center;
         cursor: pointer;
-        line-height: 1.2rem;
+        user-select: none;
+    }
+
+    &__add:hover {
+        opacity: .85;
+        transform: scale(1.1)
+    }
+    &__add:active {
+        opacity: 1;
+        transform: scale(1)
     }
 
     &__item {
         margin-left: 1rem;
         font-size: 23px;
         font-weight: bold;
+        flex-grow: 1;
     }
-
 }
