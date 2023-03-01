@@ -1,9 +1,11 @@
 import "./Home.scss"
 
+
 function Home() {
 
     return (
-        <section></section>
+        <section>
+        </section>
     )
 }
 
