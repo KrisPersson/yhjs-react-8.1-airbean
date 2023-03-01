@@ -1,0 +1,111 @@
+@import '../scss/variables';
+
+.cart {
+    font-family: inherit;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgb(0 0 0 / .7);
+    transition: height .2s;
+}
+
+.cart .icon {
+    background-color: $brown;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        opacity: .8;
+    }
+
+    &:active {
+        opacity: 1;
+    }
+
+    &__number {
+        font-size: 12px;
+        font-weight: bold;
+        position: absolute;
+        top: -4px;
+        right: 0;
+        background-color: #e5674e;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+
+    }
+}
+
+.cart .order {
+    background-color: white;
+    color: $brown;
+    margin: 5rem 1rem 1rem;
+    padding: 1rem;
+    height: 0;
+    min-height: 86%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    // transition: all 1s;
+
+    &__arrow {
+        position: absolute;
+        top: -13px;
+        right: 14px;
+        width: 32px;
+        height: 40px;
+        background-color: white;
+        clip-path: polygon(0 50%, 50% 0, 100% 50%);
+    }
+
+    &__h2 {
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    &__items {
+        margin-bottom: 1rem;
+    }
+
+    &__total {
+        margin-top: auto;
+        margin-bottom: 2rem;
+
+    }
+
+    .pay-button {
+        font: 700 24px 'PT Serif', serif;
+        padding: 1rem;
+        border-radius: 999px;
+        border: none;
+        color: white;
+        background-color: $brown;
+        margin: 1rem 2rem 2rem;
+        cursor: pointer;
+    }
+
+    .pay-button:hover {
+        opacity: .9;
+        transform: scale(1.03);
+    }
+
+    .pay-button:active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
