@@ -32,19 +32,38 @@ export default function Cart() {
     }
 
     function handleBuyClick() {
-        console.log(cart);
-        const orderArr = makeOrderArrayFromCart(cart)
+        if(cart.length === 0) return
+        if(!sessionStorage.orders) {
+            sessionStorage.orders = "[]"
+        }
+        
         const order = {
-            "details": {
-                "order": orderArr
+            details: {
+                order: makeOrderArrayFromCart(cart)
             }
         }
-
-        console.log(order);
-
-        // skicka ordern (newCart) till /api/beans/order
-        // return: {eta:number, orderNr:string} 
-        // spara i sessionStorage eller store
+         
+        fetch("https://airbean.awesomo.dev/api/beans/order",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                athorization: `Bearer ${sessionStorage.loggedInToken}` ?? null  //if logged in: set athorization: "Bearer {token}" else 'null'
+            },
+            body: JSON.stringify(order)
+        })
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`Something wrong with the order: ${response.status}`)
+            }
+            return response.json()
+        })
+        .then (data => {
+            const savedOrders = JSON.parse(sessionStorage.orders)
+            savedOrders.push(data)
+            console.log(savedOrders)
+            sessionStorage.orders = JSON.stringify(savedOrders)
+        })
+        // sessionStorage behålls vid uppdatering av sidan. Försvinner när fönstret stängs.
     }
 
     return (
@@ -77,6 +96,14 @@ export default function Cart() {
 
 function makeOrderArrayFromCart(cart) {
     const orderArray = []
+    for(let i = 0; i < cart.length; i++) {
+        for(let j = 0; j < cart[i].count; j++) {
+            orderArray.push({
+                name: cart[i].title,
+                price: cart[i].price
+            })
+        }
+    }
 
     return orderArray
 }
