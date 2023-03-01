@@ -4,21 +4,10 @@ import {useSelector} from "react-redux"
 import MenuItem from "./menuItem"
 
 export default function Cart() {
-    const cart = useSelector(state => state.cart)
-    const newCart = [] // som cart men utan dubletter, 'count' anger antal
-    for(let i = 0; i < cart.length; i++) {
-        if(!newCart.some(item => item.id === cart[i].id)) {
-            newCart.push({...cart[i], count:1})
-        } else {
-            newCart.find(item => item.id === cart[i].id).count++
-        }
-    }
-
-    console.log(newCart);
-
     const [showCart, setShowCart] = useState(false);
+    const cart = useSelector(state => state.cart)
 
-    const menuItems = newCart.map((item, i) => {
+    const menuItems = cart.map((item, i) => {
         return (
             <section className="order__items" key={i}>
                 <MenuItem props={{
@@ -31,7 +20,8 @@ export default function Cart() {
         )
     })
 
-    const sum = cart.reduce((acc, item) => acc + item.price, 0)
+    const itemsCount = cart.reduce((acc, item) => acc + item.count, 0)
+    const totalSum = cart.reduce((acc, item) => acc + (item.price * item.count), 0)
 
     function handleToggleClick(e) {
         const parent = e.currentTarget.parentElement
@@ -45,7 +35,6 @@ export default function Cart() {
 
     function handleBuyClick() {
         // skicka ordern (newCart) till /api/beans/order
-        // men api:et tillåter bara en kaffe
         // return: {eta:number, orderNr:string} 
         // spara i sessionStorage eller store
     }
@@ -53,7 +42,7 @@ export default function Cart() {
     return (
         <section className="cart">
             <section className="icon" onClick={(e) => handleToggleClick(e)}>
-                <div className="icon__number">{cart.length}</div>
+                <div className="icon__number">{itemsCount}</div>
                 <img src="shoppingbag.svg" alt="shoppingbag" />
             </section>
             {showCart &&
@@ -64,8 +53,8 @@ export default function Cart() {
                 <section className="order__total">
                     <MenuItem props={{
                         title: "Total",
-                        end: sum,
-                        desc: "inkl moms + dr;narleverans",
+                        end: totalSum,
+                        desc: "inkl moms + drönarleverans",
                         small: false
                     }} />
                 </section>
