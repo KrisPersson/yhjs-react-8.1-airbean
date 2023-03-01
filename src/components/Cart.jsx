@@ -32,12 +32,12 @@ export default function Cart() {
     }
 
     function handleBuyClick() {
-        if(cart.length === 0) return
+        if(cart.length === 0) return // man kan ej beställa 0 varor
         if(!sessionStorage.orders) {
             sessionStorage.orders = "[]"
         }
         
-        const order = {
+        const order = { // objektet som skickas till APIet vid order
             details: {
                 order: makeOrderArrayFromCart(cart)
             }
@@ -63,6 +63,7 @@ export default function Cart() {
             console.log(savedOrders)
             sessionStorage.orders = JSON.stringify(savedOrders)
         })
+        // ordrarna sparas i arrayen: sessionStorage.orders 
         // sessionStorage behålls vid uppdatering av sidan. Försvinner när fönstret stängs.
     }
 
