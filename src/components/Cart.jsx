@@ -6,7 +6,6 @@ import MenuItem from "./menuItem"
 export default function Cart() {
     const [showCart, setShowCart] = useState(false);
     const cart = useSelector(state => state.cart)
-
     const menuItems = cart.map((item, i) => {
         return (
             <section className="order__items" key={i}>
@@ -19,7 +18,6 @@ export default function Cart() {
             </section>
         )
     })
-
     const itemsCount = cart.reduce((acc, item) => acc + item.count, 0)
     const totalSum = cart.reduce((acc, item) => acc + (item.price * item.count), 0)
 
@@ -34,6 +32,16 @@ export default function Cart() {
     }
 
     function handleBuyClick() {
+        console.log(cart);
+        const orderArr = makeOrderArrayFromCart(cart)
+        const order = {
+            "details": {
+                "order": orderArr
+            }
+        }
+
+        console.log(order);
+
         // skicka ordern (newCart) till /api/beans/order
         // return: {eta:number, orderNr:string} 
         // spara i sessionStorage eller store
@@ -65,4 +73,10 @@ export default function Cart() {
             }
         </section>
     )
+}
+
+function makeOrderArrayFromCart(cart) {
+    const orderArray = []
+
+    return orderArray
 }

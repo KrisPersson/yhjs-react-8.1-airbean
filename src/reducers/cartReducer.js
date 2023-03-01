@@ -4,10 +4,10 @@ const initialState = {
 
 export default function cartReducer(state = initialState, action) {
     switch(action.type) {
-        case "ADD": { // lägg till egenskapen 'count' för antal items
+        case "ADD": { // lägg till egenskapen 'count' för antal artiklar
             const cartCopy = [...state.cart]
             if(!cartCopy.some(item => item.id === action.payload.id)) {
-                cartCopy.push({...action.payload, count:1}) // om item inte finns: count:1
+                cartCopy.push({...action.payload, count:1}) // om payload inte finns: count:1
             } else {                                        // annars count++
                 cartCopy.find(item => item.id === action.payload.id).count++
             }
