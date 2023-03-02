@@ -4,21 +4,9 @@ import {useSelector} from "react-redux"
 import MenuItem from "./menuItem"
 
 export default function Cart() {
-    const cart = useSelector(state => state.cart)
-    const newCart = [] // som cart men utan dubletter, 'count' anger antal
-    for(let i = 0; i < cart.length; i++) {
-        if(!newCart.some(item => item.id === cart[i].id)) {
-            newCart.push({...cart[i], count:1})
-        } else {
-            newCart.find(item => item.id === cart[i].id).count++
-        }
-    }
-
-    console.log(newCart);
-
     const [showCart, setShowCart] = useState(false);
-
-    const menuItems = newCart.map((item, i) => {
+    const cart = useSelector(state => state.cart)
+    const menuItems = cart.map((item, i) => {
         return (
             <section className="order__items" key={i}>
                 <MenuItem props={{
@@ -30,8 +18,8 @@ export default function Cart() {
             </section>
         )
     })
-
-    const sum = cart.reduce((acc, item) => acc + item.price, 0)
+    const itemsCount = cart.reduce((acc, item) => acc + item.count, 0)
+    const totalSum = cart.reduce((acc, item) => acc + (item.price * item.count), 0)
 
     function handleToggleClick(e) {
         const parent = e.currentTarget.parentElement
@@ -44,16 +32,45 @@ export default function Cart() {
     }
 
     function handleBuyClick() {
-        // skicka ordern (newCart) till /api/beans/order
-        // men api:et tillåter bara en kaffe
-        // return: {eta:number, orderNr:string} 
-        // spara i sessionStorage eller store
+        if(cart.length === 0) return // man kan ej beställa 0 varor
+        if(!sessionStorage.orders) {
+            sessionStorage.orders = "[]"
+        }
+        
+        const order = { // objektet som skickas till APIet vid order
+            details: {
+                order: makeOrderArrayFromCart(cart)
+            }
+        }
+         
+        fetch("https://airbean.awesomo.dev/api/beans/order",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                athorization: `Bearer ${sessionStorage.loggedInToken}` ?? null  //if logged in: set athorization: "Bearer {token}" else 'null'
+            },
+            body: JSON.stringify(order)
+        })
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`Something wrong with the order: ${response.status}`)
+            }
+            return response.json()
+        })
+        .then (data => {
+            const savedOrders = JSON.parse(sessionStorage.orders)
+            savedOrders.push(data)
+            console.log(savedOrders)
+            sessionStorage.orders = JSON.stringify(savedOrders)
+        })
+        // ordrarna sparas i arrayen: sessionStorage.orders 
+        // sessionStorage behålls vid uppdatering av sidan. Försvinner när fönstret stängs.
     }
 
     return (
         <section className="cart">
             <section className="icon" onClick={(e) => handleToggleClick(e)}>
-                <div className="icon__number">{cart.length}</div>
+                <div className="icon__number">{itemsCount}</div>
                 <img src="shoppingbag.svg" alt="shoppingbag" />
             </section>
             {showCart &&
@@ -64,8 +81,8 @@ export default function Cart() {
                 <section className="order__total">
                     <MenuItem props={{
                         title: "Total",
-                        end: sum,
-                        desc: "inkl moms + dr;narleverans",
+                        end: totalSum,
+                        desc: "inkl moms + drönarleverans",
                         small: false
                     }} />
                 </section>
@@ -76,4 +93,18 @@ export default function Cart() {
             }
         </section>
     )
+}
+
+function makeOrderArrayFromCart(cart) {
+    const orderArray = []
+    for(let i = 0; i < cart.length; i++) {
+        for(let j = 0; j < cart[i].count; j++) {
+            orderArray.push({
+                name: cart[i].title,
+                price: cart[i].price
+            })
+        }
+    }
+
+    return orderArray
 }
