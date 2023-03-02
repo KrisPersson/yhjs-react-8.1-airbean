@@ -3,6 +3,8 @@ import { useState } from 'react'
 
 import Login from "../components/Login"
 
+import NavMenuButton from "./../components/NavMenuButton"
+
 function Profile() {
 
     const [isLoggedIn, setIsloggedIn] = useState(false)
