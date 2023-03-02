@@ -47,6 +47,7 @@ function Profile() {
                     <p className="profile__order-history__order-item--total-spent__total-amt">1669 kr</p>
                 </li>
             </ul> </> :
+            
             <Login fakeLogin={ fakeLogin } /> }
             
         </section>
