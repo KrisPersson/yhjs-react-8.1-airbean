@@ -5,6 +5,8 @@ import { addItem } from "../actions/cartActions";
 import Cart from "../components/Cart.jsx"
 import MenuItem from "../components/MenuItem.jsx"
 
+import NavMenuButton from "./../components/NavMenuButton"
+
 function Menu() {
     const dispatch = useDispatch()
 
