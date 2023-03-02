@@ -1,0 +1,57 @@
+@import '../scss/variables';
+
+.menu {
+    font-family: 'PT Serif', serif;
+    padding: 8rem 1rem 6rem;
+    position: relative;
+    color: $brown;
+    background: no-repeat top/100% url("leaves-bg-top.svg"),
+                no-repeat bottom/100% url("leaves-bg-bottom.svg"),
+                $pink;
+
+    &__h1 {
+        margin: 1rem;
+        font-size: 42px;
+        font-weight: 700;
+        text-align: left;
+    }
+    &__pBold{
+        
+        font-weight: 600;
+        
+    }
+    &__p{
+        font-family: 'Work Sans';
+        font-style: normal;
+        font-size: 14px;
+        line-height: 160%;
+        margin: 1rem 1.4rem 1rem 1rem;
+    }
+    &__photo{
+        width: 74px;
+        height: 74px;
+        border-radius: 50px;
+        background: no-repeat url("photo.svg");
+        position: relative;
+        left: 27%;
+        margin-top: 3rem;
+        margin-bottom: 0;
+    }
+    &__name{
+        font-family: "PT Serif";
+        font-style: normal;
+        font-weight: 700;
+        size: 22px;
+        line-height: 35.2px;
+        text-align: center;
+        margin: 0;
+    }
+    &__role{
+        font-family: "Work Sans";
+        font-weight: 400;
+        size: 12px;
+        line-height: 19.2px;
+        text-align: center;
+        margin: 0;
+    }
+}

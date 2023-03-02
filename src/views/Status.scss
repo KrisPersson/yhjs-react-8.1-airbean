@@ -1,0 +1,75 @@
+@import '../scss/variables';
+
+
+.wrapper{
+    width: 375px;
+    height: 655px;
+    background-color: $orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__order{
+        font-family: "Work Sans";
+        font-weight: 100;
+        size: 16px;
+        opacity: 60%;
+        position: relative;
+        bottom: 50px;
+        color: #FFFFFF;
+    }
+
+    &__orderNumber{
+        font-weight: 700;
+        margin-left: 10px;
+        color: #FFFFFF;
+
+    }
+
+    &__drone{
+        width: 200px;
+        height: 200px;
+        background: no-repeat top/100% url("drone.svg");
+        position: relative;
+        bottom: 30px;
+    }
+    &__h1{
+        position: relative;
+        bottom: 50px;
+        font-family: 'PT Serif';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 120%;
+        color: #FFFFFF;
+        margin: 0px 50px 0 50px;
+        text-align: center;
+    }
+
+    &__h2{
+        font-family: 'Work Sans';
+        font-style: normal;
+        font-weight: 100;
+        font-size: 16px;
+        line-height: 120%;
+        color: #FFFFFF;
+        position: relative;
+        bottom: 40px;
+    }
+
+    &__button{
+        width: 184px;
+        height: 55px;
+        left: 98px;
+        top: 530px;
+        background: #FFFFFF;
+        border-radius: 50px;
+        border: none;
+        font-family: 'PT Serif';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 120%;
+    }
+}
