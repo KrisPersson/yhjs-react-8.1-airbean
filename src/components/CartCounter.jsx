@@ -7,7 +7,7 @@ export default function CartCounter(props) {
     const dispatch = useDispatch()
     return (
         <article className="cart-counter">
-            <div className="change-amount" onClick={() => dispatch(removeItem(item.id))}>-</div>
+            <div className="change-amount" onClick={() => dispatch(removeItem(item.id))}>&#8722;</div>
             <div>{item.count}</div>
             <div className="change-amount" onClick={() => dispatch(addItem(item))}>+</div>
         </article>

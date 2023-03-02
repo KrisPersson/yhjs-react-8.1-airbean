@@ -30,14 +30,14 @@
 
     &__add {
         font-size: 25px;
-        line-height: 1.2rem;
         background-color: $brown;
         color: white;
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
-        display: grid;
-        place-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
         user-select: none;
     }
