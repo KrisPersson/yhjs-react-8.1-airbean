@@ -3,6 +3,8 @@ import { useState, useEffect} from "react"
 import { useDispatch } from "react-redux";
 import { addItem } from "../actions/cartActions";
 
+import NavMenuButton from "./../components/NavMenuButton"
+
 function Menu() {
     const dispatch = useDispatch()
 

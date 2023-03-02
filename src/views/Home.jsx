@@ -1,9 +1,13 @@
 import "./Home.scss"
 
+import NavMenuButton from "./../components/NavMenuButton"
+
 function Home() {
 
     return (
-        <section></section>
+        <section>
+            <NavMenuButton />
+        </section>
     )
 }
 
