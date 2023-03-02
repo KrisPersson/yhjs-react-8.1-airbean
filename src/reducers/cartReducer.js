@@ -16,11 +16,9 @@ export default function cartReducer(state = initialState, action) {
         case "REMOVE": {
             let cartCopy = [...state.cart]
             const itemToDecreace = cartCopy.find(item => item.id === action.payload)
-            if(itemToDecreace.count > 0) {
-                itemToDecreace.count--
-                if(itemToDecreace.count === 0) {
-                    cartCopy = cartCopy.filter(item => item.id !== itemToDecreace.id)
-                }
+            itemToDecreace.count--
+            if(itemToDecreace.count === 0) {
+                cartCopy = cartCopy.filter(item => item.id !== itemToDecreace.id)
             }
             return {...state, cart: cartCopy}
         }
