@@ -1,0 +1,20 @@
+@import '../scss/variables';
+
+.cart-counter {
+    display: flex;
+    gap: 6px;
+}
+
+.change-amount {
+    background-color: $brown;
+    color: white;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    line-height: 1.2rem;
+    user-select: none;
+    cursor: pointer;
+}

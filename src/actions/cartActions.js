@@ -5,4 +5,9 @@ export const addItem = (item) => {
     }
 }
 
-// TODO add action creator to remove item
+export const removeItem = (id) => {
+    return {
+        type: "REMOVE", // action type
+        payload: id // menyItem objekt
+    }
+}
