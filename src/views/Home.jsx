@@ -2,6 +2,7 @@ import "./Home.scss"
 
 import ToggleNavButton from "./../components/ToggleNavButton"
 
+
 function Home() {
 
     return (

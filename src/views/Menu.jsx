@@ -2,6 +2,8 @@ import "./Menu.scss"
 import { useState, useEffect} from "react"
 import { useDispatch } from "react-redux";
 import { addItem } from "../actions/cartActions";
+import Cart from "../components/Cart.jsx"
+import MenuItem from "../components/MenuItem.jsx"
 
 import ToggleNavButton from "./../components/ToggleNavButton"
 
@@ -23,6 +25,7 @@ function Menu() {
 
     return (
         <section className="menu">
+            <Cart />
             <h1 className="menu__h1">Meny</h1>
             
             {menuItems.map((menuItem, index) => {
@@ -32,7 +35,12 @@ function Menu() {
                             +
                         </div>
                         <div className="menu__item">
-                            {menuItem.title}
+                            <MenuItem props={{
+                                title: menuItem.title,
+                                end: menuItem.price,
+                                desc: menuItem.desc,
+                                small: false
+                            }} />
                         </div>
                     </article>
                 )
