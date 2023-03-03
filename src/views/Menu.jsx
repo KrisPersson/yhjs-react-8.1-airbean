@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../actions/cartActions";
 import Cart from "../components/Cart.jsx"
 import MenuItem from "../components/MenuItem.jsx"
-import NavMenuButton from "../components/NavMenuButton"
+
+import ToggleNavButton from "./../components/ToggleNavButton"
 
 function Menu() {
     const dispatch = useDispatch()

@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import Login from "../components/Login"
 
-import NavMenuButton from "./../components/NavMenuButton"
+import ToggleNavButton from "./../components/ToggleNavButton"
 
 
 const BASE_URL = 'https://airbean.awesomo.dev'
