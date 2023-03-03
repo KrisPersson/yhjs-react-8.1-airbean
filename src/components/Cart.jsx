@@ -47,17 +47,17 @@ export default function Cart() {
             }
         }
 
-        const athorization = null
+        const authorization = null
         const validToken = await isTokenValid(sessionStorage.token)
         if(validToken) {
-            athorization = `Bearer ${sessionStorage.token}`
+            authorization = `Bearer ${sessionStorage.token}`
         }
 
         fetch("https://airbean.awesomo.dev/api/beans/order",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                athorization: athorization
+                authorization: authorization
             },
             body: JSON.stringify(order)
         })
@@ -118,6 +118,7 @@ function makeOrderArrayFromCart(cart) {
     return orderArray
 }
 
+// Denna funktion är för tillfället dubblerad från Profile.jsx
 async function isTokenValid(token) {
     const response = await fetch('https://airbean.awesomo.dev/api/user/status', {
         method: "GET",
