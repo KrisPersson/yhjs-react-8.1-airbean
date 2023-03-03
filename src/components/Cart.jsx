@@ -32,7 +32,7 @@ export default function Cart() {
         setShowCart(!showCart)
     }
 
-    function handleBuyClick() {
+    async function handleBuyClick() {
         if(itemsCount === 0) { // man kan ej beställa 0 varor
             console.log("Varukorgen är tom!")
             return
@@ -46,12 +46,18 @@ export default function Cart() {
                 order: makeOrderArrayFromCart(cart)
             }
         }
-        // kolla om token är giltig först??? /api/user/status
+
+        const athorization = null
+        const validToken = await isTokenValid(sessionStorage.token)
+        if(validToken) {
+            athorization = `Bearer ${sessionStorage.token}`
+        }
+
         fetch("https://airbean.awesomo.dev/api/beans/order",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                athorization: `Bearer ${sessionStorage.loggedInToken}` ?? null  //if logged in: set athorization: "Bearer {token}" else 'null'
+                athorization: athorization
             },
             body: JSON.stringify(order)
         })
@@ -110,4 +116,20 @@ function makeOrderArrayFromCart(cart) {
         }
     }
     return orderArray
+}
+
+async function isTokenValid(token) {
+    const response = await fetch('https://airbean.awesomo.dev/api/user/status', {
+        method: "GET",
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
+    console.log(response)
+    if (response.status === 401) {
+        return false
+    }
+    if (response.status === 200) {
+        return true
+    }
 }
