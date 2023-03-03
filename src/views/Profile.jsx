@@ -5,13 +5,59 @@ import Login from "../components/Login"
 
 import ToggleNavButton from "./../components/ToggleNavButton"
 
+
+const BASE_URL = 'https://airbean.awesomo.dev'
+const STATUS_URL = '/api/user/status'
+const HISTORY_URL = '/api/user/history'
+
 function Profile() {
 
-    const [isLoggedIn, setIsloggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    function fakeLogin() {
-        setIsloggedIn(true)
+    async function isTokenValid(token) {
+
+        const response = await fetch(BASE_URL + '/api/user/status', {
+            method: "GET",
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        })
+        if (response.status === 401) {
+            return false
+        }
+        if (response.status === 200) {
+            return true
+        }
     }
+
+    async function getOrderHistory() {
+
+        const response = await fetch(BASE_URL + HISTORY_URL, {
+            method: "GET",
+            headers: {
+                authorization: `Bearer ${sessionStorage.token}`
+              }
+        })
+        const data = await response.json()
+        console.log(data)
+
+        if (data.success) {
+            console.log('Order history for this user exists!')
+        } else if (!data.success) {
+            console.log(data.message)
+        }
+    }
+
+    if (isLoggedIn && isTokenValid(sessionStorage.token)) {
+        getOrderHistory()
+    } else if (isLoggedIn) {
+        setIsLoggedIn(false)
+    }
+
+    
+
+    
+    
 
     return (
         <section className="profile">
@@ -49,7 +95,8 @@ function Profile() {
                     <p className="profile__order-history__order-item--total-spent__total-amt">1669 kr</p>
                 </li>
             </ul> </> :
-            <Login fakeLogin={ fakeLogin } /> }
+
+            <Login setIsLoggedIn={ setIsLoggedIn } /> }
             
         </section>
     )

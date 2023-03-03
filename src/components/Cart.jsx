@@ -2,6 +2,7 @@ import "./Cart.scss"
 import {useState} from "react"
 import {useSelector} from "react-redux"
 import MenuItem from "./menuItem"
+import CartCounter from "./CartCounter"
 
 export default function Cart() {
     const [showCart, setShowCart] = useState(false);
@@ -11,7 +12,7 @@ export default function Cart() {
             <section className="order__items" key={i}>
                 <MenuItem props={{
                     title: item.title,
-                    end: item.count,
+                    end: <CartCounter item={item} />,
                     desc: item.price + " kr",
                     small: true
                 }} />
@@ -32,7 +33,10 @@ export default function Cart() {
     }
 
     function handleBuyClick() {
-        if(cart.length === 0) return // man kan ej beställa 0 varor
+        if(itemsCount === 0) { // man kan ej beställa 0 varor
+            console.log("Varukorgen är tom!")
+            return
+        }
         if(!sessionStorage.orders) {
             sessionStorage.orders = "[]"
         }
@@ -42,7 +46,7 @@ export default function Cart() {
                 order: makeOrderArrayFromCart(cart)
             }
         }
-         
+        // kolla om token är giltig först??? /api/user/status
         fetch("https://airbean.awesomo.dev/api/beans/order",{
             method: "POST",
             headers: {
@@ -105,6 +109,5 @@ function makeOrderArrayFromCart(cart) {
             })
         }
     }
-
     return orderArray
 }

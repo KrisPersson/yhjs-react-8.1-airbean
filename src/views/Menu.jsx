@@ -25,6 +25,9 @@ function Menu() {
 
     return (
         <section className="menu">
+            <div className="nav-button">
+                <NavMenuButton />
+            </div>
             <Cart />
             <h1 className="menu__h1">Meny</h1>
             

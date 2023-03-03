@@ -13,7 +13,15 @@ export default function cartReducer(state = initialState, action) {
             }
             return {...state, cart: cartCopy}
         }
-        // TODO add action type 'remove'
+        case "REMOVE": {
+            let cartCopy = [...state.cart]
+            const itemToDecreace = cartCopy.find(item => item.id === action.payload)
+            itemToDecreace.count--
+            if(itemToDecreace.count === 0) {
+                cartCopy = cartCopy.filter(item => item.id !== itemToDecreace.id)
+            }
+            return {...state, cart: cartCopy}
+        }
         default:
             return state;
     }

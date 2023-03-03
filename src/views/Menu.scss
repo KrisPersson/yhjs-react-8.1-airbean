@@ -4,11 +4,18 @@
     font-family: 'PT Serif', serif;
     padding: 8rem 1rem 6rem;
     position: relative;
+    min-height: 700px;
     color: $brown;
     background: no-repeat top/100% url("leaves-bg-top.svg"),
                 no-repeat bottom/100% url("leaves-bg-bottom.svg"),
                 $pink;
 
+    .nav-button {
+        position: absolute;
+        top: 32px;
+        left: 32px;
+    }
+    
     &__h1 {
         margin: 1rem;
         font-size: 42px;
@@ -24,14 +31,14 @@
 
     &__add {
         font-size: 25px;
-        line-height: 1.2rem;
         background-color: $brown;
         color: white;
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
-        display: grid;
-        place-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
         user-select: none;
     }

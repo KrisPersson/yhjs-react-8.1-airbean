@@ -2,8 +2,11 @@ import "./Login.scss"
 
 import { useState } from 'react'
 
-function Login( { fakeLogin } ) {
+const BASE_URL = 'https://airbean.awesomo.dev'
+const SIGNUP_URL = '/api/user/signup'
+const LOGIN_URL = '/api/user/login'
 
+function Login( { setIsLoggedIn } ) {
 
     const [isCreateAccountMode, setIsCreateAccountMode] = useState(false)
     const [nameInput, setNameInput] = useState('')
@@ -19,23 +22,65 @@ function Login( { fakeLogin } ) {
         setPasswordInput(value)
     }
 
+    async function handleLogin() {
 
-    function handleLogin() {
-
-        const nameField = nameInput
-        const passwordField = passwordInput
-        fakeLogin()
+        const userInput = {
+            username: nameInput,
+            password: passwordInput
+        }
         
+        try {
+            const response = await fetch(BASE_URL + LOGIN_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userInput)
+            })
+            const data = await response.json()
+
+            if (!response.ok) {
+                throw new Error(`Could not login at this time: ${response.status}`)
+            } else if (!data.success) {
+                console.log(data.message)
+            } else if (data.success) {
+                console.log(`Successfully logged in! Token: ${data.token} `)
+                sessionStorage.setItem('token', data.token)
+                setIsLoggedIn(true)
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    function handleCreateAccount() {
-        const nameField = nameInput
-        const passwordField = passwordInput
+    async function handleCreateAccount() {
+        
+        const userInput = {
+            username: nameInput,
+            password: passwordInput
+        }
 
+        try {
+            const response = await fetch(BASE_URL + SIGNUP_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userInput)
+            })
+            if (!response.ok) {
+                throw new Error(`Could not signup at this time: ${response.status}`)
+            } else if (response.status === 200) {
+                setIsCreateAccountMode(false)
+            }
+
+            const data = await response.json()
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
-
-    
-
 
     return (
         <article className="login">
