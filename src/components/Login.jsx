@@ -6,7 +6,7 @@ const BASE_URL = 'https://airbean.awesomo.dev'
 const SIGNUP_URL = '/api/user/signup'
 const LOGIN_URL = '/api/user/login'
 
-function Login( { setIsLoggedIn } ) {
+function Login( { setUserName, setIsLoggedIn } ) {
 
     const [isCreateAccountMode, setIsCreateAccountMode] = useState(false)
     const [nameInput, setNameInput] = useState('')
@@ -46,6 +46,7 @@ function Login( { setIsLoggedIn } ) {
             } else if (data.success) {
                 console.log(`Successfully logged in! Token: ${data.token} `)
                 sessionStorage.setItem('token', data.token)
+                setUserName(userInput.username)
                 setIsLoggedIn(true)
             }
 
