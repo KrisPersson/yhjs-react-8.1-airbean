@@ -13,7 +13,6 @@ export const HISTORY_URL = '/api/user/history'
 
 
 export async function isTokenValid(token) {
-    // console.log('Ran isTokenValid')
     const response = await fetch(BASE_URL + STATUS_URL, {
         method: "GET",
         headers: {

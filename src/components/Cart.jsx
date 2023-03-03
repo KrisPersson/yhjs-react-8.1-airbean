@@ -1,12 +1,14 @@
 import "./Cart.scss"
 import {useState} from "react"
-import {useSelector} from "react-redux"
+import {useSelector, useDispatch} from "react-redux"
 import MenuItem from "./menuItem"
 import CartCounter from "./CartCounter"
 import {useNavigate} from "react-router-dom"
+import {emptyCart} from "../actions/cartActions"
 
 export default function Cart() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [showCart, setShowCart] = useState(false);
     const cart = useSelector(state => state.cart)
     const menuItems = cart.map((item, i) => {
@@ -22,7 +24,12 @@ export default function Cart() {
         )
     })
     const itemsCount = cart.reduce((acc, item) => acc + item.count, 0)
-    const totalSum = cart.reduce((acc, item) => acc + (item.price * item.count), 0)
+    let totalSum = cart.reduce((acc, item) => acc + (item.price * item.count), 0)
+
+    const bryggKaffeCount = cart.find(item => item.id === "coffee-vxig26my4y")?.count ?? 0
+    const gustBakCount = cart.find(item => item.id === "pastry-db3gfsuqpr")?.count ?? 0
+    const campaingnCount = Math.min(bryggKaffeCount, gustBakCount)
+    totalSum = totalSum - 49 * campaingnCount
 
     function handleToggleClick(e) {
         const parent = e.currentTarget.parentElement
@@ -72,14 +79,14 @@ export default function Cart() {
         .then (data => {
             const savedOrders = JSON.parse(sessionStorage.orders)
             savedOrders.push(data)
-            console.log(savedOrders)
+            // console.log(savedOrders)
             sessionStorage.orders = JSON.stringify(savedOrders)
+            dispatch(emptyCart())
             navigate("/status")
         })
         // ordrarna sparas i arrayen: sessionStorage.orders 
         // sessionStorage behålls vid uppdatering av sidan. Försvinner när fönstret stängs.
     }
-
     return (
         <section className="cart">
             <section className="icon" onClick={(e) => handleToggleClick(e)}>
@@ -92,6 +99,16 @@ export default function Cart() {
                 <h2 className="order__h2">Din beställning</h2>
                 {menuItems}
                 <section className="order__total">
+                    {campaingnCount > 0 && 
+                    <div className="order__campaign">
+                        <MenuItem props={{
+                            title: "Bryggkaffe + G.A.bakelse",
+                            end: campaingnCount,
+                            desc: "-" + campaingnCount * 49 + " kr",
+                            small: true
+                        }} />
+                    </div>
+                    }
                     <MenuItem props={{
                         title: "Total",
                         end: totalSum,
@@ -129,7 +146,6 @@ async function isTokenValid(token) {
             authorization: `Bearer ${token}`
         }
     })
-    console.log(response)
     if (response.status === 401) {
         return false
     }
