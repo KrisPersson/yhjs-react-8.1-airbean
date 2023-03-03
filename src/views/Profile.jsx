@@ -1,6 +1,6 @@
 import "./Profile.scss"
 
-import NavMenuButton from "./../components/NavMenuButton"
+import ToggleNavButton from "./../components/ToggleNavButton"
 
 function Profile() {
 
