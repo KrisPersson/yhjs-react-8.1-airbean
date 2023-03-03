@@ -1,5 +1,7 @@
 @import '../scss/variables';
 
+
+
 .profile {
     background: no-repeat top/100% url("leaves-bg-top.svg"),
     // no-repeat bottom/100% url("leaves-bg-bottom.svg"),
@@ -12,6 +14,11 @@
 
     width: 100%;
     min-height: 42rem;
+
+    header {
+        grid-row: 1 / span 1;
+        padding: 1rem;
+    }
 
     &__user {
 
@@ -82,6 +89,12 @@
             font-family: 'PT Serif', 'sans-serif';
             font-size: 1.375rem;
             vertical-align: center;
+        }
+
+        &__no-history {
+            font-family: 'Work Sans', 'sans-serif';
+            line-height: 1.5rem;
+            opacity: 0.8;
         }
 
         &__order-item {

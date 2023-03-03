@@ -51,7 +51,7 @@ export default function Cart() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                athorization: `Bearer ${sessionStorage.loggedInToken}` ?? null  //if logged in: set athorization: "Bearer {token}" else 'null'
+                authorization: `Bearer ${sessionStorage.token}` ?? null  //if logged in: set athorization: "Bearer {token}" else 'null'
             },
             body: JSON.stringify(order)
         })
