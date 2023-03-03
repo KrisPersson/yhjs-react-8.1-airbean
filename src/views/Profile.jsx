@@ -5,13 +5,7 @@ import Login from "../components/Login"
 import OrderHistory from "../components/OrderHistory"
 import OrderHistoryItem from "../components/OrderHistoryItem"
 
-
-
-import NavMenuButton from "./../components/NavMenuButton"
-
 import ToggleNavButton from "./../components/ToggleNavButton"
-
-
 
 export const BASE_URL = 'https://airbean.awesomo.dev'
 const STATUS_URL = '/api/user/status'
@@ -36,24 +30,14 @@ export async function isTokenValid(token) {
     }
 }
 
-
-
-
 function Profile() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [userName, setUserName] = useState('')
 
-    
-    
-    
-
-    
-
-    
     return (
         <section className="profile">
-             <header><NavMenuButton /></header>
+             <header><ToggleNavButton /></header>
         {  isLoggedIn ?  
             <>  
             <section className="profile__user">
