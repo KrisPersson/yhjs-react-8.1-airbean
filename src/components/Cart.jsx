@@ -3,10 +3,8 @@ import {useState} from "react"
 import {useSelector} from "react-redux"
 import MenuItem from "./menuItem"
 import CartCounter from "./CartCounter"
-import { useNavigate } from "react-router-dom"
 
 export default function Cart() {
-    const navigate = useNavigate()
     const [showCart, setShowCart] = useState(false);
     const cart = useSelector(state => state.cart)
     const menuItems = cart.map((item, i) => {
@@ -49,7 +47,7 @@ export default function Cart() {
             }
         }
 
-        let authorization = ""
+        const authorization = null
         const validToken = await isTokenValid(sessionStorage.token)
         if(validToken) {
             authorization = `Bearer ${sessionStorage.token}`
@@ -74,7 +72,6 @@ export default function Cart() {
             savedOrders.push(data)
             console.log(savedOrders)
             sessionStorage.orders = JSON.stringify(savedOrders)
-            navigate("/status")
         })
         // ordrarna sparas i arrayen: sessionStorage.orders 
         // sessionStorage behålls vid uppdatering av sidan. Försvinner när fönstret stängs.
