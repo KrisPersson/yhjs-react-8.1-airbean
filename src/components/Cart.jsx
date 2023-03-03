@@ -1,10 +1,14 @@
 import "./Cart.scss"
 import {useState} from "react"
-import {useSelector} from "react-redux"
+import {useSelector, useDispatch} from "react-redux"
 import MenuItem from "./menuItem"
 import CartCounter from "./CartCounter"
+import {useNavigate} from "react-router-dom"
+import {emptyCart} from "../actions/cartActions"
 
 export default function Cart() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [showCart, setShowCart] = useState(false);
     const cart = useSelector(state => state.cart)
     const menuItems = cart.map((item, i) => {
@@ -20,7 +24,12 @@ export default function Cart() {
         )
     })
     const itemsCount = cart.reduce((acc, item) => acc + item.count, 0)
-    const totalSum = cart.reduce((acc, item) => acc + (item.price * item.count), 0)
+    let totalSum = cart.reduce((acc, item) => acc + (item.price * item.count), 0)
+
+    const bryggKaffeCount = cart.find(item => item.id === "coffee-vxig26my4y")?.count ?? 0
+    const gustBakCount = cart.find(item => item.id === "pastry-db3gfsuqpr")?.count ?? 0
+    const campaingnCount = Math.min(bryggKaffeCount, gustBakCount)
+    totalSum = totalSum - 49 * campaingnCount
 
     function handleToggleClick(e) {
         const parent = e.currentTarget.parentElement
@@ -32,7 +41,7 @@ export default function Cart() {
         setShowCart(!showCart)
     }
 
-    function handleBuyClick() {
+    async function handleBuyClick() {
         if(itemsCount === 0) { // man kan ej beställa 0 varor
             console.log("Varukorgen är tom!")
             return
@@ -46,12 +55,18 @@ export default function Cart() {
                 order: makeOrderArrayFromCart(cart)
             }
         }
-        // kolla om token är giltig först??? /api/user/status
+
+        let authorization = ""
+        const validToken = await isTokenValid(sessionStorage.token)
+        if(validToken) {
+            authorization = `Bearer ${sessionStorage.token}`
+        }
+
         fetch("https://airbean.awesomo.dev/api/beans/order",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${sessionStorage.token}` ?? null  //if logged in: set athorization: "Bearer {token}" else 'null'
+                authorization: authorization
             },
             body: JSON.stringify(order)
         })
@@ -64,13 +79,14 @@ export default function Cart() {
         .then (data => {
             const savedOrders = JSON.parse(sessionStorage.orders)
             savedOrders.push(data)
-            console.log(savedOrders)
+            // console.log(savedOrders)
             sessionStorage.orders = JSON.stringify(savedOrders)
+            dispatch(emptyCart())
+            navigate("/status")
         })
         // ordrarna sparas i arrayen: sessionStorage.orders 
         // sessionStorage behålls vid uppdatering av sidan. Försvinner när fönstret stängs.
     }
-
     return (
         <section className="cart">
             <section className="icon" onClick={(e) => handleToggleClick(e)}>
@@ -83,6 +99,16 @@ export default function Cart() {
                 <h2 className="order__h2">Din beställning</h2>
                 {menuItems}
                 <section className="order__total">
+                    {campaingnCount > 0 && 
+                    <div className="order__campaign">
+                        <MenuItem props={{
+                            title: "Bryggkaffe + G.A.bakelse",
+                            end: campaingnCount,
+                            desc: "-" + campaingnCount * 49 + " kr",
+                            small: true
+                        }} />
+                    </div>
+                    }
                     <MenuItem props={{
                         title: "Total",
                         end: totalSum,
@@ -110,4 +136,20 @@ function makeOrderArrayFromCart(cart) {
         }
     }
     return orderArray
+}
+
+// Denna funktion är för tillfället dubblerad från Profile.jsx
+async function isTokenValid(token) {
+    const response = await fetch('https://airbean.awesomo.dev/api/user/status', {
+        method: "GET",
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
+    if (response.status === 401) {
+        return false
+    }
+    if (response.status === 200) {
+        return true
+    }
 }

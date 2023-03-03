@@ -21,12 +21,13 @@ function Menu() {
                 return response.json()
             })
             .then(data => setMenuItems(data.menu))
+            .catch(e => console.log(e))
     }, [])
 
     return (
         <section className="menu">
             <div className="nav-button">
-                {/* <NavMenuButton /> */}
+                <ToggleNavButton />
             </div>
             <Cart />
             <h1 className="menu__h1">Meny</h1>

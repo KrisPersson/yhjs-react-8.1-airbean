@@ -22,6 +22,9 @@ export default function cartReducer(state = initialState, action) {
             }
             return {...state, cart: cartCopy}
         }
+        case "EMPTY": {
+            return {...state, cart: []}
+        }
         default:
             return state;
     }
