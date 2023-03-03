@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-import "./NavMenuButton.scss"
+import "./ToggleNavButton.scss"
 
-import NavMenu from "./Navmenu"
+import NavMenu from "./Nav"
 
-function NavMenuButton() {
+function NavMenuButton(props) {
 
     const [showMenu, setShowMenu] = useState(false);
     
@@ -14,10 +14,10 @@ function NavMenuButton() {
 
     return (
         <div>
-            <div className="navMenuButton" onClick={ handleClick }>
+            <div className="toggleNavButton" onClick={ handleClick }>
                 { /*TODO sätt en ikon eller CSS*/ }
             </div>
-            { showMenu === true && <NavMenu showMenu={ showMenu }/> }
+            { showMenu === true && <NavMenu showMenu={ showMenu } isLoggedIn={ true /*TODO lägg in en inloggningstoken*/ }/> }
         </div>
     )
 }

@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../actions/cartActions";
 import Cart from "../components/Cart.jsx"
 import MenuItem from "../components/MenuItem.jsx"
-import NavMenuButton from "../components/NavMenuButton"
+
+import ToggleNavButton from "./../components/ToggleNavButton"
 
 function Menu() {
     const dispatch = useDispatch()
@@ -25,7 +26,7 @@ function Menu() {
     return (
         <section className="menu">
             <div className="nav-button">
-                <NavMenuButton />
+                {/* <NavMenuButton /> */}
             </div>
             <Cart />
             <h1 className="menu__h1">Meny</h1>

@@ -1,14 +1,13 @@
 import "./Home.scss"
 
-import NavMenuButton from "./../components/NavMenuButton"
+import ToggleNavButton from "./../components/ToggleNavButton"
 
 
 function Home() {
 
     return (
         <section>
-            <NavMenuButton />
-
+            <ToggleNavButton />
         </section>
     )
 }
