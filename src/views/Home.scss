@@ -17,6 +17,10 @@
         top: 260px;
         left: 160px;
         margin: 0;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        transform-origin: bottom;
+        cursor: pointer;
     }
     
     &__h1{
