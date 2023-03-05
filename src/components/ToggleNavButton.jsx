@@ -4,7 +4,7 @@ import "./ToggleNavButton.scss"
 
 import NavMenu from "./Nav"
 
-function NavMenuButton(props) {
+function ToggleNavButton(props) {
 
     const [showMenu, setShowMenu] = useState(false);
     
@@ -22,4 +22,4 @@ function NavMenuButton(props) {
     )
 }
 
-export default NavMenuButton;
+export default ToggleNavButton;

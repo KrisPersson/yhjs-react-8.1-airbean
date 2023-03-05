@@ -8,7 +8,7 @@ function NavMenu(props) {
     const isLoggedIn = props.isLoggedIn;
 
     return (
-        <div className="navMenu">
+        <div className="nav">
             <Link to="/Menu" className="navLink">Meny</Link>
             <Link to="/About" className="navLink" >Vårt kaffe</Link>
             <Link to="/Profile" className="navLink" >Min profil</Link>

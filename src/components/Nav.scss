@@ -1,6 +1,8 @@
-.navMenu {
+.nav {
     margin: 0;
     position: absolute;
+    top: 0px;
+    left: 0px;
     width: 100%;
     height: 100%;
     background-color: #2F2926;
@@ -10,11 +12,10 @@
 
 .menuButton {
     text-align: center;
-    color: #FFFFFF;
-    font-family: 'PT Serif', serif;
 }
 
 .navLink {
-    background-color: blue;
     width: 10rem;
+    color: #FFFFFF;
+    font-family: 'PT Serif', serif;
 }
