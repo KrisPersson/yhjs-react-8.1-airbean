@@ -84,8 +84,6 @@ export default function Cart() {
             navigate("/status")
         })
         dispatch(emptyCart())
-        // ordrarna sparas i arrayen: sessionStorage.orders 
-        // sessionStorage behålls vid uppdatering av sidan. Försvinner när fönstret stängs.
     }
     return (
         <section className="cart">
@@ -138,7 +136,6 @@ function makeOrderArrayFromCart(cart) {
     return orderArray
 }
 
-// Denna funktion är för tillfället dubblerad från Profile.jsx
 async function isTokenValid(token) {
     const response = await fetch('https://airbean.awesomo.dev/api/user/status', {
         method: "GET",
