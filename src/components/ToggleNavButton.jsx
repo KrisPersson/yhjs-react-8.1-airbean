@@ -9,15 +9,15 @@ function ToggleNavButton(props) {
     const [showMenu, setShowMenu] = useState(false);
     
     function handleClick() {
-        setShowMenu(!showMenu)
+        setShowMenu(!showMenu);
     }
 
     return (
         <div>
-            <div className="toggleNavButton" onClick={ handleClick }>
+            <div className="toggleNavButton" onClick={ handleClick } style={ showMenu === true ? { backgroundColor: "white" } : { backgroundColor: "black" } }>
                 { /*TODO sätt en ikon eller CSS*/ }
             </div>
-            { showMenu === true && <NavMenu showMenu={ showMenu } isLoggedIn={ true /*TODO lägg in en inloggningstoken*/ }/> }
+            { showMenu === true && <NavMenu isLoggedIn={ false /*TODO lägg in en inloggningstoken*/ }/> }
         </div>
     )
 }
