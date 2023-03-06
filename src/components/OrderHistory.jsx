@@ -40,7 +40,7 @@ function OrderHistory({ userName }) {
     
         if (data.success) {
             console.log('Order history for this user exists!')
-            setOrderHistory(data.orderHistory)
+            setOrderHistory([...data.orderHistory].reverse())
         } else if (!data.success) {
             console.log(data.message)
         }
