@@ -21,6 +21,7 @@ function Menu() {
                 return response.json()
             })
             .then(data => setMenuItems(data.menu))
+            .catch(e => console.log(e))
     }, [])
 
     return (

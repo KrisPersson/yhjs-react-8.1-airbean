@@ -7,7 +7,13 @@ export const addItem = (item) => {
 
 export const removeItem = (id) => {
     return {
-        type: "REMOVE", // action type
-        payload: id // menyItem objekt
+        type: "REMOVE", 
+        payload: id 
+    }
+}
+
+export const emptyCart = () => {
+    return {
+        type: "EMPTY"
     }
 }
