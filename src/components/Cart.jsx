@@ -17,7 +17,7 @@ export default function Cart() {
                 <MenuItem props={{
                     title: item.title,
                     end: <CartCounter item={item} />,
-                    desc: item.price + " kr",
+                    desc: (item.price * item.count) + " kr",
                     small: true
                 }} />
             </section>
@@ -81,9 +81,9 @@ export default function Cart() {
             savedOrders.push(data)
             // console.log(savedOrders)
             sessionStorage.orders = JSON.stringify(savedOrders)
-            dispatch(emptyCart())
             navigate("/status")
         })
+        dispatch(emptyCart())
         // ordrarna sparas i arrayen: sessionStorage.orders 
         // sessionStorage behålls vid uppdatering av sidan. Försvinner när fönstret stängs.
     }
@@ -116,7 +116,7 @@ export default function Cart() {
                         small: false
                     }} />
                 </section>
-                <button className="pay-button" onClick={handleBuyClick}>
+                <button className="pay-button" onClick={handleBuyClick} disabled={itemsCount === 0}>
                     Take my money!
                 </button>
             </section>
