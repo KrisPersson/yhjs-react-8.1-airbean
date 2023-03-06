@@ -9,12 +9,6 @@
     background: no-repeat top/100% url("leaves-bg-top.svg"),
                 no-repeat bottom/100% url("leaves-bg-bottom.svg"),
                 $pink;
-
-    .nav-button {
-        position: absolute;
-        top: 32px;
-        left: 32px;
-    }
     
     &__h1 {
         margin: 1rem;
