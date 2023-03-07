@@ -1,11 +1,13 @@
 import "./About.scss"
-
+import Cart from "../components/Cart"
 import ToggleNavButton from "./../components/ToggleNavButton"
 
 function About() {
 
     return (
         <section className="menu">
+            <Cart/>
+            <ToggleNavButton/>
             <h1 className="menu__h1">Vårt kaffe</h1>
             <p className="menu__pBold menu__p">
                 Pumpkin spice mug, barista cup, sit macchiato, kopi-luwak, doppio, grounds dripper, crema, strong whipped, variety extra iced id lungo half and half mazagran. Pumpkin spice.

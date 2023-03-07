@@ -16,7 +16,7 @@
         size: 16px;
         opacity: 60%;
         position: relative;
-        bottom: 50px;
+        bottom: 20px;
         color: #FFFFFF;
     }
 
@@ -32,7 +32,10 @@
         height: 200px;
         background: no-repeat top/100% url("drone.svg");
         position: relative;
-        bottom: 30px;
+        bottom: 10px;
+        animation: MoveUpDown 2s linear infinite;
+
+        
     }
     &__h1{
         position: relative;
@@ -58,6 +61,7 @@
         bottom: 40px;
     }
 
+
     &__button{
         width: 184px;
         height: 55px;
@@ -72,4 +76,13 @@
         font-size: 24px;
         line-height: 120%;
     }
+
+    @keyframes MoveUpDown {
+        0%, 100% {
+          bottom: 0;
+        }
+        50% {
+          bottom: 20px;
+        }
+      }
 }
