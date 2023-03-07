@@ -77,6 +77,7 @@ export default function Cart() {
             return response.json()
         })
         .then (data => {
+            // console.log(data)
             const savedOrders = JSON.parse(sessionStorage.orders)
             savedOrders.push(data)
             // console.log(savedOrders)
