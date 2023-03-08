@@ -1,6 +1,6 @@
 .toggleNavButton {
 
-    background: no-repeat top/100% url("Nav-button.svg");
+    //background: no-repeat top/100% url("Nav-button.svg");
 
     width: 3rem;
 
@@ -13,11 +13,14 @@
     left: 20px;
 
     z-index: 3;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border-radius: 100%;
 }
 
 .toggleNavClose {
 
-    background: no-repeat top/100% url("Nav-button-close.svg");
+    //background: no-repeat top/100% url("Nav-button-close.svg");
 
     width: 3rem;
 
@@ -30,4 +33,7 @@
     left: 20px;
 
     z-index: 3;
+    background-color: #FFFFFF;
+    border-radius: 100%;
+    cursor: pointer;
 }

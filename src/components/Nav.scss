@@ -4,7 +4,7 @@
 
     width: 350px;
 
-    height: 600px;
+    height: 550px;
 
     background-color: #2F2926;
 
@@ -22,7 +22,7 @@
 
     left: 10px;
 
-    top: 50px;
+    top: 80px;
 
     border-radius: 10px;
     
@@ -42,13 +42,24 @@
 .navLink {
 
     font-family: 'PT Serif', serif;
-
-    font-size: 1.5rem;
-
-    padding: 15px;
-
+    //font-family: "Sacramento", cursive;
+    font-size: 1.3rem;
     color: #FFFFFF;
-
     text-decoration: none;
-
 }
+
+.grow { 
+    transition: all .2s ease-in-out; 
+    }
+    
+.grow:hover { 
+    transform: scale(1.1); 
+    text-shadow: 0 0 5px #ffa500, 
+    0 0 15px #ffa500, 
+    0 0 20px #ffa500, 
+    0 0 40px #ffa500, 
+    0 0 60px #ff0000, 
+    0 0 10px #ff8d00, 
+    0 0 98px #ff0000;
+    color: #fff6a9;
+    }
