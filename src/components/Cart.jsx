@@ -17,7 +17,7 @@ export default function Cart() {
                 <MenuItem props={{
                     title: item.title,
                     end: <CartCounter item={item} />,
-                    desc: item.price + " kr",
+                    desc: (item.price * item.count) + " kr",
                     small: true
                 }} />
             </section>
@@ -77,15 +77,14 @@ export default function Cart() {
             return response.json()
         })
         .then (data => {
+            // console.log(data)
             const savedOrders = JSON.parse(sessionStorage.orders)
             savedOrders.push(data)
             // console.log(savedOrders)
             sessionStorage.orders = JSON.stringify(savedOrders)
-            dispatch(emptyCart())
             navigate("/status")
         })
-        // ordrarna sparas i arrayen: sessionStorage.orders 
-        // sessionStorage behålls vid uppdatering av sidan. Försvinner när fönstret stängs.
+        dispatch(emptyCart())
     }
     return (
         <section className="cart">
@@ -116,7 +115,7 @@ export default function Cart() {
                         small: false
                     }} />
                 </section>
-                <button className="pay-button" onClick={handleBuyClick}>
+                <button className="pay-button" onClick={handleBuyClick} disabled={itemsCount === 0}>
                     Take my money!
                 </button>
             </section>
@@ -138,7 +137,6 @@ function makeOrderArrayFromCart(cart) {
     return orderArray
 }
 
-// Denna funktion är för tillfället dubblerad från Profile.jsx
 async function isTokenValid(token) {
     const response = await fetch('https://airbean.awesomo.dev/api/user/status', {
         method: "GET",
