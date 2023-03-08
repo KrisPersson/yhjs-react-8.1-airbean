@@ -1,9 +1,33 @@
 .toggleNavButton {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+
+    background: no-repeat top/100% url("Nav-button.svg");
+
+    width: 3rem;
+
+    height: 3rem;
+
     position: absolute;
-    top: 32px;
-    left: 32px;
-    
+
+    top: 20px;
+
+    left: 20px;
+
+    z-index: 2;
+}
+
+.toggleNavClose {
+
+    background: no-repeat top/100% url("Nav-button-close.svg");
+
+    width: 3rem;
+
+    height: 3rem;
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 20px;
+
+    z-index: 2;
 }
