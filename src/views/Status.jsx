@@ -9,7 +9,7 @@ const ORDER_STATUS_URL = `/api/beans/order/status/`
 function Status( {props}) {
 
     const navigate = useNavigate()
-    const orders = JSON.parse(sessionStorage.orders)
+    const orders = sessionStorage.orders ? JSON.parse(sessionStorage.orders) : []
     const [eta, setEta] = useState(0)
     const [currentOrderNum, setCurrentOrderNum] = useState('')
 
@@ -22,7 +22,7 @@ function Status( {props}) {
         const response = await fetch(BASE_URL + HISTORY_URL, {
             method: "GET",
             headers: {
-                authorization: `Bearer ${sessionStorage.token}`
+                authorization: sessionStorage.token ? `Bearer ${sessionStorage.token}` : ''
               }
         })
         const data = await response.json()
@@ -34,7 +34,7 @@ function Status( {props}) {
             //console.log(orderHistory[0].orderNr)
             setCurrentOrderNum(orderHistory[0].orderNr)
         } else if (!data.success) {
-            //console.log(data.message)
+           if (orders.length > 0) {setCurrentOrderNum(orders[orders.length - 1].orderNr)}
         }
     }
 
@@ -43,7 +43,7 @@ function Status( {props}) {
         const response = await fetch(BASE_URL + ORDER_STATUS_URL + orderNr, {
             method: "GET",
             headers: {
-                authorization: `Bearer ${sessionStorage.token}`
+                authorization: sessionStorage.token ? `Bearer ${sessionStorage.token}` : ''
               }
         })
         const data = await response.json()
@@ -68,19 +68,26 @@ function Status( {props}) {
     return (
         <section className="wrapper">
             <ToggleNavButton/>
-            <p className="wrapper__order wrapper__bounce">
+
+            {
+            currentOrderNum ?
+                <p className="wrapper__order wrapper__bounce">
                 Ordernummer 
                 <span className="wrapper__orderNumber">
                      #{ currentOrderNum }
                 </span>
-            </p>
+                </p>
+            :
+            ''
+            }
             <figure className="wrapper__drone"></figure>
 
-            <h1 className="wrapper__h1">Din beställning är på väg!</h1>
-            <h2 className="wrapper__h2">{ eta } minuter</h2>
-            <button className="wrapper__button" onClick={()=> {navigate("/about")}}>ok, cool!</button>
+            <h1 className="wrapper__h1">{ currentOrderNum && eta > 0 ? 'Din beställning är på väg!' : orders.length === 0 && eta === 0 ? "Gå till menyn för att göra en beställning" : "Gå till menyn för att göra en beställning" }</h1>
+            <h2 className="wrapper__h2">{ currentOrderNum && eta > 0 ? `${ eta } minuter` : currentOrderNum && eta === 0 ? 'Din beställning har levererats!' : '' }</h2>
+            <button className="wrapper__button" onClick={()=> {navigate("/menu")}}>ok, cool!</button>
         </section>
     )
 }
 
 export default Status
+
