@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import router from './router'
-import { RouterProvider} from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 import './index.scss'
 
 import { legacy_createStore } from 'redux';
