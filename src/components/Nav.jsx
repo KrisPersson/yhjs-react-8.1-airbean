@@ -15,6 +15,7 @@ function Nav() {
                 <Link to="/Profile" className="navLink" ><h2>Min profil</h2></Link> :
                 <Link to="/Profile" className="navLink" ><h2>Logga in</h2></Link> }
             <Link to="/Status" className="navLink" ><h2>Orderstatus</h2></Link>
+
         </div>
     )
 }
