@@ -14,7 +14,7 @@ function ToggleNavButton(props) {
 
     return (
         <div>
-            <div className={showMenu ? "toggleNavClose" : "toggleNavButton"} onClick={ handleClick }>
+            <div className="toggleNavButton" onClick={ handleClick }>
             <Hamburger toggled={isOpen} toggle={setOpen} />
             </div>
             { showMenu === true && <NavMenu /> }

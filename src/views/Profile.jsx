@@ -47,7 +47,6 @@ function Profile() {
                         <aside className="avatar-body"></aside>
                     </article>
                     <h2 className="profile__user__name">{ sessionStorage.username }</h2>
-                    {/* <p className="profile__user__email">sixten.kaffelover@zocom.se</p> */}
                 </section>
                 <OrderHistory userName={ sessionStorage.username } />
             

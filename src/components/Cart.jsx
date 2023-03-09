@@ -42,15 +42,14 @@ export default function Cart() {
     }
 
     async function handleBuyClick() {
-        if(itemsCount === 0) { // man kan ej beställa 0 varor
-            console.log("Varukorgen är tom!")
+        if(itemsCount === 0) { 
             return
         }
         if(!sessionStorage.orders) {
             sessionStorage.orders = "[]"
         }
         
-        const order = { // objektet som skickas till APIet vid order
+        const order = { 
             details: {
                 order: makeOrderArrayFromCart(cart)
             }
@@ -77,10 +76,8 @@ export default function Cart() {
             return response.json()
         })
         .then (data => {
-            // console.log(data)
             const savedOrders = JSON.parse(sessionStorage.orders)
             savedOrders.push(data)
-            // console.log(savedOrders)
             sessionStorage.orders = JSON.stringify(savedOrders)
             navigate("/status")
         })

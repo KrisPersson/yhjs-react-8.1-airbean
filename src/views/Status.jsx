@@ -1,21 +1,19 @@
 import "./Status.scss"
 import ToggleNavButton from "../components/ToggleNavButton"
 import {useState, useEffect } from "react"
-import {useNavigate, useLocation } from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import { BASE_URL, HISTORY_URL } from "./Profile"
 
 const ORDER_STATUS_URL = `/api/beans/order/status/`
 
-function Status( {props}) {
+function Status() {
 
     const navigate = useNavigate()
     const orders = sessionStorage.orders ? JSON.parse(sessionStorage.orders) : []
     const [eta, setEta] = useState(0)
     const [currentOrderNum, setCurrentOrderNum] = useState('')
 
-    const { state } = useLocation()
 
-    // console.log(state)
 
     async function getOrderHistory() {
 
@@ -26,12 +24,9 @@ function Status( {props}) {
               }
         })
         const data = await response.json()
-        //console.log(data)
     
         if (data.success) {
-            //console.log('Order history for this user exists!')
             const orderHistory = [...data.orderHistory].reverse()
-            //console.log(orderHistory[0].orderNr)
             setCurrentOrderNum(orderHistory[0].orderNr)
         } else if (!data.success) {
            if (orders.length > 0) {setCurrentOrderNum(orders[orders.length - 1].orderNr)}
@@ -47,7 +42,6 @@ function Status( {props}) {
               }
         })
         const data = await response.json()
-        // console.log(data.orderNr)
     
         if (data.eta) {
             setEta(data.eta)
