@@ -82,9 +82,9 @@ function Status( {props}) {
             }
             <figure className="wrapper__drone"></figure>
 
-            <h1 className="wrapper__h1">{ currentOrderNum && eta > 0 ? 'Din beställning är på väg!' : orders.length === 0 && eta === 0 ? "Gå till menyn för att göra en beställning" : "Gå till menyn för att göra en beställning" }</h1>
+            <h1 className="wrapper__h1">{ currentOrderNum && eta > 0 ? 'Din beställning är på väg!' : "Gå till menyn för att göra en beställning" }</h1>
             <h2 className="wrapper__h2">{ currentOrderNum && eta > 0 ? `${ eta } minuter` : currentOrderNum && eta === 0 ? 'Din beställning har levererats!' : '' }</h2>
-            <button className="wrapper__button" onClick={()=> {navigate("/menu")}}>ok, cool!</button>
+            <button className="wrapper__button" onClick={()=> {navigate("/menu")}}>Ok, cool!</button>
         </section>
     )
 }

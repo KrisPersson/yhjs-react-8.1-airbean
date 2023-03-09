@@ -44,7 +44,7 @@ function Login( { setIsLoggedIn } ) {
             } else if (!data.success) {
                 console.log(data.message)
             } else if (data.success) {
-                console.log(`Successfully logged in! Token: ${data.token} `)
+                // console.log(`Successfully logged in! Token: ${data.token} `)
                 sessionStorage.setItem('token', data.token)
                 sessionStorage.setItem('username', userInput.username)
 
@@ -74,7 +74,7 @@ function Login( { setIsLoggedIn } ) {
             if (!response.ok) {
                 throw new Error(`Could not signup at this time: ${response.status}`)
             } else if (response.status === 200) {
-                console.log("Successfully signed up!")
+                // console.log("Successfully signed up!")
                 setIsCreateAccountMode(false)
             }
 
